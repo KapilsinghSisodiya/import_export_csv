@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 	def self.import(file)
 		 @arr = []
 		 	begin
-		 		raise "safety_care group missing!" if File.extname(file.original_filename) != ".csv"
+		 		raise "File type must be csv" if File.extname(file.original_filename) != ".csv"
 		 		CSV.foreach(file.path, headers: true) do |row|
 			 		if row.to_hash["email"].present? && row.to_hash["name"].present?
 			 			row.to_hash["email"].match('^.+@.+$').present? ? create_data(row.to_hash, @arr) : @arr << "#{row.to_hash["email"]} is invalid Email" 
