@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
 	def self.to_csv(options = {})
 		CSV.generate(options) do |csv|
-    	csv << column_names
+    	csv << ["name", "email", "telephone_number", "website"]
     	all.each do |user|
       	csv << user.attributes.values_at(*["name", "email", "telephone_number", "website"])
     	end
